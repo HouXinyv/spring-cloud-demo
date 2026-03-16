@@ -12,12 +12,14 @@ spring:
                 matchTrailingSlash: true # 匹配末尾的/
           filters:
             - RewritePath=/api/order/?(?<segment>.*), /$\{segment} # (?<segment>.*)命名捕获组，segment是组名
+            - OnceToken=X-Response-Token, jwt
         - id: product-route
           uri: lb://service-product
           predicates:
             - Path=/api/product/**
           filters:
             - RewritePath=/api/product/?(?<segment>.*), /$\{segment}
+
         - id: bing-route
           uri: https://cn.bing.com/
           predicates:
