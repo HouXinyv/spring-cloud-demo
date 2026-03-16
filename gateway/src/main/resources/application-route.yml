@@ -30,3 +30,5 @@ spring:
                 param: q
                 regexp: haha
             - Vip=user,miao # 实现自定义断言
+      default-filters:
+        - AddResponseHeader=X-Response-miao, 123
