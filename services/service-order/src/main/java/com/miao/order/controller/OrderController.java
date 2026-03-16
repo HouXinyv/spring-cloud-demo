@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 
 //@CrossOrigin
-@RequestMapping("/api/order")
 @Slf4j
 @RestController
 //@RefreshScope
