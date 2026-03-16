@@ -25,3 +25,4 @@ spring:
               args:
                 param: q
                 regexp: haha
+            - Vip=user,miao # 实现自定义断言
