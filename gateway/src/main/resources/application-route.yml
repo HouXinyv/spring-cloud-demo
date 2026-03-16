@@ -1,0 +1,27 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: order-route
+          uri: lb://service-order
+          predicates:
+#            - Path=/api/order/**
+            - name: Path
+              args:
+                parttens: /api/order/**
+                matchTrailingSlash: true # 匹配末尾的/
+        - id: product-route
+          uri: lb://service-product
+          predicates:
+            - Path=/api/product/**
+        - id: bing-route
+          uri: https://cn.bing.com/
+          predicates:
+            - name: Path
+              args:
+                patterns: /search
+            - name: Query # 不同的名字代表了不同的类型，
+            # AbstractRoutePredicateFactory的实现类是各种类型的断言工厂，可以根据对应类名来写-name
+              args:
+                param: q
+                regexp: haha

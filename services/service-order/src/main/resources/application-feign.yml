@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    openfeign:
+      client:
+        config:
+          service-product:
+            logger-level: full
+            connect-timeout: 3000
+            read-timeout: 3000
+#            request-interceptors:
+#              - com.miao.order.feign.interceptor.TokenRequestInterceptor

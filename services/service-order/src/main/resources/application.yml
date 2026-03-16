@@ -1,0 +1,63 @@
+spring:
+  application:
+    name: service-order
+  profiles:
+    active: prod
+    include: feign
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      config:
+        import-check:
+          enabled: false
+        file-extension: yml
+        namespace: ${spring.profiles.active:dev} # 冒号后边是默认值
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+      eager: true
+      web-context-unify: false # 是否要分割请求链路，true表示不分隔
+logging:
+  level:
+    com.miao.order.feign: debug
+feign:
+  sentinel:
+    enabled: true
+
+#
+#  config:
+#    import:
+#      - nacos:common.yml?group=order
+#      - nacos:database.yml?group=order
+server:
+  port: 8080
+order:
+  auto-confirm: 333
+  timeout: 333
+
+---
+# yml的多文档格式
+spring:
+  config:
+    import:
+      - nacos:common.yml?group=order
+      - nacos:database.yml?group=order
+    activate:
+      on-profile: dev
+---
+# yml的多文档格式
+spring:
+  config:
+    import:
+      - nacos:common.yml?group=order
+      - nacos:database.yml?group=order
+    activate:
+      on-profile: test
+---
+# yml的多文档格式
+spring:
+  config:
+    import:
+      - nacos:database.yml?group=order
+    activate:
+      on-profile: prod
